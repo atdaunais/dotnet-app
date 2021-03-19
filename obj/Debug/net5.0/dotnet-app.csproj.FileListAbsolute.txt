@@ -201,3 +201,6 @@
 /home/student/hhes_project_stuff/dotnet-app/obj/Debug/net5.0/Razor/Areas/Identity/Pages/Account/_ViewImports.cshtml.g.cs
 /home/student/hhes_project_stuff/dotnet-app/obj/Debug/net5.0/Razor/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml.g.cs
 /home/student/hhes_project_stuff/dotnet-app/obj/Debug/net5.0/Razor/Areas/Identity/Pages/_ViewImports.cshtml.g.cs
+/home/student/hhes_project_stuff/dotnet-app/obj/Debug/net5.0/Razor/Views/Email/ConfirmEmail.cshtml.g.cs
+/home/student/hhes_project_stuff/dotnet-app/obj/Debug/net5.0/Razor/Views/Email/Error.cshtml.g.cs
+/home/student/hhes_project_stuff/dotnet-app/bin/Debug/net5.0/SendGrid.dll

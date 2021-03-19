@@ -15623,6 +15623,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/student/hhes_project_stuff/dotnet-app/Views/Email/ConfirmEmail.cshtml",
+      "TargetPath": "Views\\Email\\ConfirmEmail.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/student/hhes_project_stuff/dotnet-app/Templates/ControllerGenerator/ControllerGenerator/EmptyController.cshtml",
       "TargetPath": "Templates\\ControllerGenerator\\ControllerGenerator\\EmptyController.cshtml",
       "FileKind": "mvc"
@@ -15680,6 +15685,11 @@
     {
       "FilePath": "/home/student/hhes_project_stuff/dotnet-app/Views/_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/student/hhes_project_stuff/dotnet-app/Views/Email/Error.cshtml",
+      "TargetPath": "Views\\Email\\Error.cshtml",
       "FileKind": "mvc"
     },
     {

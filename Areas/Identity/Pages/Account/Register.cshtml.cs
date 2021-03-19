@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using dotnet_app.Email;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace dotnet_app.Areas.Identity.Pages.Account
 {
@@ -84,23 +87,37 @@ namespace dotnet_app.Areas.Identity.Pages.Account
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var apiKey = "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";
+                    var client = new SendGridClient(apiKey);
+
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    // await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
+                    
+
+                    // BUILD THE EMAIL
+                    var from = new EmailAddress("atdaunais@gmail.com", "Andrew Sender");
+                    var subject = "Email Verification";
+                    var to = new EmailAddress("atdaunais@gmail.com", "Andrew Recipient");
+                    var plainTextContent = "";
+                    var htmlContent = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
+                    var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+                    var response = await client.SendEmailAsync(msg);
+
+                    // LOG EMAIL SENT STATUS
+                    Console.WriteLine(response.StatusCode);
+                    
+                    if (response.StatusCode == System.Net.HttpStatusCode.Accepted)
+                        return RedirectToAction("Index");
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        return RedirectToAction("/Error");
                     }
                 }
                 foreach (var error in result.Errors)
