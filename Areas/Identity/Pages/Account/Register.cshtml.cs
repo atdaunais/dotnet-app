@@ -87,7 +87,7 @@ namespace dotnet_app.Areas.Identity.Pages.Account
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var apiKey = "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";
+                    var apiKey = "";
                     var client = new SendGridClient(apiKey);
 
                     var callbackUrl = Url.Page(
